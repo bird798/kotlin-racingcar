@@ -17,7 +17,7 @@ class PersonTest {
     fun testNullType() {
         val actual = Person(age = 20, name = "닭대가리", nickname = null)
 
-        assertThat(actual.nickname).isNull() 
+        assertThat(actual.nickname).isNull()
     }
 
     @Test
