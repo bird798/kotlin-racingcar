@@ -5,7 +5,7 @@ class Calculator() {
         PLUS("+", { a, b -> a + b }),
         MINUS("-", { a, b -> a - b }),
         MULTIPLY("*", { a, b -> a * b }),
-        DIVIDE("/", { a, b -> a / b }),
+        DIVIDE("/", { a, b -> if (b != 0.0) a / b else throw IllegalArgumentException(ERROR_MESSAGE_DIVIDE_ZERO) }),
         ;
 
         companion object {
@@ -23,6 +23,7 @@ class Calculator() {
         const val ERROR_MESSAGE_ILLEGAL_FORMULAS = "정의되지 않은 연산자입니다."
         const val ERROR_MESSAGE_ILLEGAL_OPERATOR = "정의되지 않은 연산자입니다."
         const val ERROR_MESSAGE_ILLEGAL_OPERAND = "숫자가 아닌값이 입력되었습니다."
+        const val ERROR_MESSAGE_DIVIDE_ZERO = "0으로는 나눌수 없습니다."
     }
 
     fun calculate(formulas: String): Double {
