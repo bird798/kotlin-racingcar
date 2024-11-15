@@ -1,11 +1,10 @@
 package racinggame.core
 
-class Car(val name: String, val canMove: () -> Boolean) {
-    var moveCount = 0
-
-    fun tryMove() {
-        if (canMove()) {
-            moveCount += 1
-        }
+data class Car(
+    val name: String,
+    var position: Int,
+) {
+    fun move() {
+        position += 1
     }
 }

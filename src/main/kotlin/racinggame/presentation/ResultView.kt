@@ -1,14 +1,18 @@
 package racinggame.presentation
 
-import racinggame.core.Race
+import racinggame.core.Round
 
-class ResultView(val race: Race) {
+class ResultView() {
     companion object {
         private const val DRIVING_LINE = "-"
     }
 
-    fun draw() {
-        race.cars.forEach { car -> println("${car.name} ${DRIVING_LINE.repeat(car.moveCount)}") }
+    fun start() {
+        println("레이싱 시작")
+    }
+
+    fun drawRacingStatus(round: Round) {
+        round.cars.forEach { car -> println("${car.name} ${DRIVING_LINE.repeat(car.position)}") }
         println()
     }
 }
