@@ -1,4 +1,4 @@
-import step3.RacingGame
+import racinggame.application.RacingGame
 
 fun main() {
     RacingGame().start()

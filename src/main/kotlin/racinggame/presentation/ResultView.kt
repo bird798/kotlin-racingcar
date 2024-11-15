@@ -1,6 +1,6 @@
-package step3.ui
+package racinggame.presentation
 
-import step3.Race
+import racinggame.core.Race
 
 class ResultView(val race: Race) {
     companion object {

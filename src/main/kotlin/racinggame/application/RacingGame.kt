@@ -1,8 +1,9 @@
-package step3
+package racinggame.application
 
-import step3.condition.RandomMoveCondition
-import step3.ui.InputView
-import step3.ui.ResultView
+import racinggame.core.Race
+import racinggame.core.condition.RandomMoveCondition
+import racinggame.presentation.InputView
+import racinggame.presentation.ResultView
 
 class RacingGame {
     companion object {

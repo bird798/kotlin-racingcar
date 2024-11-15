@@ -1,6 +1,6 @@
-package step3
+package racinggame.core
 
-import step3.condition.MoveCondition
+import racinggame.core.condition.MoveCondition
 
 class Race(carCount: Int, moveCondition: MoveCondition) {
     init {

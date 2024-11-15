@@ -1,4 +1,4 @@
-package step3.ui
+package racinggame.presentation
 
 class InputView(val guide: String) {
     companion object {

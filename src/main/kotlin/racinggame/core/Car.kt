@@ -1,4 +1,4 @@
-package step3
+package racinggame.core
 
 class Car(val name: String, val canMove: () -> Boolean) {
     var moveCount = 0

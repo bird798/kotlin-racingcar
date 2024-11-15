@@ -1,4 +1,4 @@
-package step3.condition
+package racinggame.core.condition
 
 class RandomMoveCondition(val range: IntRange, val threshold: Int) : MoveCondition {
     init {

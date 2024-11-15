@@ -1,7 +1,8 @@
-package step3.condition
+package racinggame.condition
 
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.Test
+import racinggame.core.condition.RandomMoveCondition
 
 class RandomMoveConditionTest {
     @Test

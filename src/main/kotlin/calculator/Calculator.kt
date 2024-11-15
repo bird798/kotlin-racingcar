@@ -1,4 +1,4 @@
-package step2
+package calculator
 
 class Calculator() {
     enum class OPERATOR(val operator: String, val apply: (Double, Double) -> Double) {

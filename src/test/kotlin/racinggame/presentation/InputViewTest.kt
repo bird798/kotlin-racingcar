@@ -1,4 +1,4 @@
-package step3.ui
+package racinggame.presentation
 
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
