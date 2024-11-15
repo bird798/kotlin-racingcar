@@ -9,8 +9,15 @@ class RandomMoveCondition(val range: IntRange, val threshold: Int) : MoveConditi
         const val ERROR_MESSAGE_THRESHOLD_ERROR = "범위가 잘못되었습니다."
     }
 
+    private fun generate(): Int {
+        return range.random()
+    }
+
+    fun canMove(number: Int): Boolean {
+        return number >= threshold
+    }
+
     override fun canMove(): Boolean {
-        val randomInt = range.random()
-        return randomInt >= threshold
+        return canMove(generate())
     }
 }
