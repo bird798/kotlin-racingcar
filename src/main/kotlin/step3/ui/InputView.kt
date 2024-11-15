@@ -2,11 +2,12 @@ package step3.ui
 
 class InputView(val guide: String) {
     companion object {
-        private const val ERROR_MESSAGE = "잘못 입력하셨습니다."
+        private const val ERROR_INVALID_STRING = "잘못 입력하셨습니다."
+        private const val ERRRR_GUIDE_IS_EMPTY = "가이드 문구가 없습니다"
     }
 
     init {
-        if (guide.isBlank()) throw IllegalArgumentException("가이드 문구가 없습니다")
+        require(guide.isNotBlank()) { ERRRR_GUIDE_IS_EMPTY }
     }
 
     fun inputNumber(): Int {
@@ -18,7 +19,7 @@ class InputView(val guide: String) {
                 return value!!.toInt()
             }
 
-            println(ERROR_MESSAGE)
+            println(ERROR_INVALID_STRING)
         }
     }
 

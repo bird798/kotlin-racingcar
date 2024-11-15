@@ -2,9 +2,11 @@ package step3.condition
 
 class RandomMoveCondition(val range: IntRange, val threshold: Int) : MoveCondition {
     init {
-        if ((threshold < range.first) || (range.last < threshold)) {
-            throw IllegalArgumentException("범위가 잘못되었습니다.")
-        }
+        require((range.first <= threshold) && (threshold <= range.last)) { ERROR_MESSAGE_THRESHOLD_ERROR }
+    }
+
+    companion object {
+        const val ERROR_MESSAGE_THRESHOLD_ERROR = "범위가 잘못되었습니다."
     }
 
     override fun canMove(): Boolean {
