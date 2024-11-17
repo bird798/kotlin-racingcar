@@ -1,5 +1,7 @@
 package racinggame.core
 
+import racinggame.core.condition.MoveCondition
+
 data class Car(
     val name: String,
     var position: Int,
@@ -8,7 +10,7 @@ data class Car(
         require(name.isNotBlank())
     }
 
-    fun move() {
-        position += 1
+    fun move(condition: MoveCondition) {
+        if (condition.canMove()) position += 1
     }
 }

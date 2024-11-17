@@ -25,7 +25,7 @@ class RacingService() {
 
     fun goRound() {
         require(::cars.isInitialized) { ERROR_NOT_STARTED }
-        cars.forEach { car -> if (moveCondition.canMove()) car.move() }
+        cars.forEach { car -> car.move(moveCondition) }
     }
 
     fun roundStatus(): Round {
