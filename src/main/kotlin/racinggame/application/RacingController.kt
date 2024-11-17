@@ -14,7 +14,6 @@ class RacingController(private val racingService: RacingService) {
     }
 
     fun start() {
-        // 입력을 받는다.
         val carCount = InputView(CAR_COUNT_GUIDE_TEXT).inputNumber()
         val movementCount = InputView(MOVEMENT_COUNT_GUIDE_TEXT).inputNumber()
 
