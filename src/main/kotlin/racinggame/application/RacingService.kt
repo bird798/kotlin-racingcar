@@ -1,6 +1,7 @@
 package racinggame.application
 
 import racinggame.core.Car
+import racinggame.core.Race
 import racinggame.core.Round
 import racinggame.core.condition.MoveCondition
 
@@ -22,14 +23,8 @@ object RacingService {
         for (i in 0 until carCount) cars.add(Car("#${i + 1}", 0))
 
         repeat(roundCount) {
-            rounds.add(goRound(moveCondition))
+            rounds.add(Race.goRound(cars, moveCondition))
         }
-    }
-
-    fun goRound(moveCondition: MoveCondition): Round {
-        cars.forEach { car -> car.move(moveCondition) }
-
-        return Round(cars.map { it.copy() })
     }
 
     fun racingResult(): List<Round> {
