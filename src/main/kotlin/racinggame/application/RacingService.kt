@@ -4,32 +4,35 @@ import racinggame.core.Car
 import racinggame.core.Round
 import racinggame.core.condition.MoveCondition
 
-class RacingService() {
-    companion object {
-        const val ERROR_CAR_COUNT = "차량 개수가 잘못되었습니다."
-        const val ERROR_NOT_STARTED = "레이스가 시작되지 않았습니다."
-    }
+object RacingService {
+    private const val ERROR_CAR_COUNT = "차량 개수가 잘못되었습니다."
+    private const val ERROR_ROUND_COUNT = "라운드 횟수가 잘못되었습니다."
 
-    lateinit var cars: MutableList<Car>
-    private lateinit var moveCondition: MoveCondition
+    var cars: MutableList<Car> = mutableListOf()
+    var rounds: MutableList<Round> = mutableListOf()
 
     fun start(
         carCount: Int,
         moveCondition: MoveCondition,
+        roundCount: Int,
     ) {
         require(carCount > 0) { ERROR_CAR_COUNT }
+        require(roundCount > 0) { ERROR_ROUND_COUNT }
 
-        this.cars = MutableList(carCount) { index -> Car("#${index + 1}", 0) }
-        this.moveCondition = moveCondition
+        for (i in 0 until carCount) cars.add(Car("#${i + 1}", 0))
+
+        repeat(roundCount) {
+            rounds.add(goRound(moveCondition))
+        }
     }
 
-    fun goRound() {
-        require(::cars.isInitialized) { ERROR_NOT_STARTED }
+    fun goRound(moveCondition: MoveCondition): Round {
         cars.forEach { car -> car.move(moveCondition) }
+
+        return Round(cars.map { it.copy() })
     }
 
-    fun roundStatus(): Round {
-        require(::cars.isInitialized) { ERROR_NOT_STARTED }
-        return Round(cars)
+    fun racingResult(): List<Round> {
+        return rounds
     }
 }
