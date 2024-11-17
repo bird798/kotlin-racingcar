@@ -27,14 +27,7 @@ class InputView(val guide: String) {
     }
 
     fun isValid(value: String?): Boolean {
-        if (value.isNullOrBlank() || value.toIntOrNull() == null) {
-            return false
-        }
-
-        if (value.toInt() <= 0) {
-            return false
-        }
-
-        return true
+        val convertedValue = value?.toIntOrNull()
+        return convertedValue != null && convertedValue > 0
     }
 }
