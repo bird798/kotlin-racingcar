@@ -34,7 +34,7 @@ class RacingServiceTest {
     @Test
     fun `레이싱 상태를 얻는 함수를 테스트한다`() {
         val racingService = RacingService()
-        val moveCondition = RandomMoveCondition((0..9), 4)
+        val moveCondition = RandomMoveCondition((0..0), 0)
         racingService.start(3, moveCondition)
 
         assertThat(racingService.roundStatus()).isEqualTo(Round(MutableList(3) { index -> Car("#${index + 1}", 0) }))
