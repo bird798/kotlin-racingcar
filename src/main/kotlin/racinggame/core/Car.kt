@@ -11,6 +11,8 @@ data class Car(
     }
 
     fun move(condition: MoveCondition) {
-        if (condition.canMove()) position += 1
+        if (condition.canMove()) {
+            position += 1
+        }
     }
 }
