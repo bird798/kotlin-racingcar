@@ -8,15 +8,18 @@ class ResultView() {
     }
 
     private fun drawRoundResult(round: Round) {
-        round.cars.forEach { car -> println("${car.name} ${DRIVING_LINE.repeat(car.position)}") }
-        println()
+        val strBuilder = StringBuilder()
+
+        round.cars.forEach { car ->
+            strBuilder.append("${car.name} ${DRIVING_LINE.repeat(car.position)}\n")
+        }
+        println(strBuilder.toString())
     }
 
     fun drawRacingResult(rounds: List<Round>) {
         println("실행 결과")
         rounds.forEach { round ->
             drawRoundResult(round)
-            println()
         }
     }
 }
