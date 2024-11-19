@@ -2,15 +2,11 @@ package racinggame.core
 
 import racinggame.core.condition.MoveCondition
 
-object Race {
+class Race {
     private var rounds: MutableList<Round> = mutableListOf()
 
-    fun reset() {
-        rounds = mutableListOf()
-    }
-
     fun goRound(
-        cars: MutableList<Car>,
+        cars: List<Car>,
         moveCondition: MoveCondition,
     ) {
         cars.forEach { car -> car.move(moveCondition) }
