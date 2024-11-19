@@ -2,7 +2,7 @@ package racinggame.application
 
 import racinggame.core.Car
 import racinggame.core.Race
-import racinggame.core.Round
+import racinggame.core.RaceResult
 import racinggame.core.condition.MoveCondition
 
 object RacingService {
@@ -13,22 +13,24 @@ object RacingService {
         names: List<String>,
         moveCondition: MoveCondition,
         roundCount: Int,
-    ) {
-        require(!names.isEmpty()) { ERROR_CAR_COUNT }
+    ): RaceResult {
+        require(names.isNotEmpty()) { ERROR_CAR_COUNT }
         require(roundCount > 0) { ERROR_ROUND_COUNT }
 
-        val cars = MutableList<Car>(names.size) { i -> Car(names[i], 0) }
+//        val cars = MutableList(names.size) { i -> Car(names[i], 0) }
 
+        val cars =
+            ArrayDeque<Car>().apply {
+                names.forEach { name ->
+                    add(Car(name, 0))
+                }
+            }
+
+        val race = Race()
         repeat(roundCount) {
-            Race.goRound(cars, moveCondition)
+            race.goRound(cars, moveCondition)
         }
-    }
 
-    fun roundResult(): List<Round> {
-        return Race.roundResult()
-    }
-
-    fun racingWinner(): List<Car> {
-        return Race.racingWinner()
+        return RaceResult(race.roundResult(), race.racingWinner())
     }
 }
