@@ -8,6 +8,7 @@ data class Car(
 ) {
     init {
         require(name.isNotBlank())
+        require(name.length <= 5)
     }
 
     fun move(condition: MoveCondition) {
