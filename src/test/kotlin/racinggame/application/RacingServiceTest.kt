@@ -6,35 +6,47 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import racinggame.core.Car
+import racinggame.core.Race
 import racinggame.core.Round
 import racinggame.core.condition.RandomMoveCondition
 
 class RacingServiceTest {
     @ParameterizedTest
     @CsvSource(
-        "0, 1",
-        "-1, 1",
-        "1, -0",
-        "1, 0",
+        "'', 1",
+        "'abcdef,abc', 1",
+        "'a,b', -1",
+        "'a,b', 0",
     )
     fun `잘못된 파라미터가 주어질때를 테스트한다`(
-        carCount: Int,
+        str: String,
         roundCount: Int,
     ) {
         val moveCondition = RandomMoveCondition((0..9), 4)
+        val names = str.split(",")
 
-        assertThatIllegalArgumentException().isThrownBy { RacingService.start(carCount, moveCondition, roundCount) }
+        assertThatIllegalArgumentException().isThrownBy { RacingService.start(names, moveCondition, roundCount) }
     }
 
     @Test
-    fun `레이싱 상태를 얻는 함수를 테스트한다`() {
+    fun `라운드 상태를 얻는 함수를 테스트한다`() {
+        Race.reset()
         val moveCondition = RandomMoveCondition((0..0), 0)
-        RacingService.start(3, moveCondition, 4)
+        RacingService.start(listOf("1", "2", "3"), moveCondition, 4)
 
         var roundIndex = 0
-        RacingService.racingResult().forEach { round ->
-            assertThat(round).isEqualTo(Round(MutableList(3) { index -> Car("#${index + 1}", roundIndex + 1) }))
+        RacingService.roundResult().forEach { round ->
+            assertThat(round).isEqualTo(Round(MutableList(3) { index -> Car("${index + 1}", roundIndex + 1) }))
             roundIndex++
         }
+    }
+
+    @Test
+    fun `레이싱 승자를 얻는 함수를 테스트한다`() {
+        Race.reset()
+        val moveCondition = RandomMoveCondition((0..0), 0)
+        RacingService.start(listOf("1", "2", "3"), moveCondition, 4)
+
+        assertThat(RacingService.racingWinner()).isEqualTo(listOf(Car("1", 4), Car("2", 4), Car("3", 4)))
     }
 }
