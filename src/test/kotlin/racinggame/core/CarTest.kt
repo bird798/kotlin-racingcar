@@ -9,7 +9,7 @@ import racinggame.core.condition.RandomMoveCondition
 
 class CarTest {
     @ParameterizedTest
-    @ValueSource(strings = [" ", ""])
+    @ValueSource(strings = [" ", "", " abcdef  ", "abcdef"])
     fun `생성자를 테스트한다`() {
         assertThatIllegalArgumentException().isThrownBy { Car("", 0) }
     }

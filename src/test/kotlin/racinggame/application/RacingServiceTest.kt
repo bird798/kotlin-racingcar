@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import racinggame.core.Car
-import racinggame.core.Race
 import racinggame.core.Round
 import racinggame.core.condition.RandomMoveCondition
 
@@ -29,13 +28,12 @@ class RacingServiceTest {
     }
 
     @Test
-    fun `라운드 상태를 얻는 함수를 테스트한다`() {
-        Race.reset()
+    fun `라운드 결과를 얻는 함수를 테스트한다`() {
         val moveCondition = RandomMoveCondition((0..0), 0)
-        RacingService.start(listOf("1", "2", "3"), moveCondition, 4)
+        val result = RacingService.start(listOf("1", "2", "3"), moveCondition, 4)
 
         var roundIndex = 0
-        RacingService.roundResult().forEach { round ->
+        result.roundList.forEach { round ->
             assertThat(round).isEqualTo(Round(MutableList(3) { index -> Car("${index + 1}", roundIndex + 1) }))
             roundIndex++
         }
@@ -43,10 +41,9 @@ class RacingServiceTest {
 
     @Test
     fun `레이싱 승자를 얻는 함수를 테스트한다`() {
-        Race.reset()
         val moveCondition = RandomMoveCondition((0..0), 0)
-        RacingService.start(listOf("1", "2", "3"), moveCondition, 4)
+        val result = RacingService.start(listOf("1", "2", "3"), moveCondition, 4)
 
-        assertThat(RacingService.racingWinner()).isEqualTo(listOf(Car("1", 4), Car("2", 4), Car("3", 4)))
+        assertThat(result.winners).isEqualTo(listOf(Car("1", 4), Car("2", 4), Car("3", 4)))
     }
 }
