@@ -10,21 +10,25 @@ object RacingService {
     private const val ERROR_ROUND_COUNT = "라운드 횟수가 잘못되었습니다."
 
     fun start(
-        carCount: Int,
+        names: List<String>,
         moveCondition: MoveCondition,
         roundCount: Int,
     ) {
-        require(carCount > 0) { ERROR_CAR_COUNT }
+        require(!names.isEmpty()) { ERROR_CAR_COUNT }
         require(roundCount > 0) { ERROR_ROUND_COUNT }
 
-        val cars = MutableList<Car>(carCount) { i -> Car("#${i + 1}", 0) }
+        val cars = MutableList<Car>(names.size) { i -> Car(names[i], 0) }
 
         repeat(roundCount) {
             Race.goRound(cars, moveCondition)
         }
     }
 
-    fun racingResult(): List<Round> {
-        return Race.racingResult()
+    fun roundResult(): List<Round> {
+        return Race.roundResult()
+    }
+
+    fun racingWinner(): List<Car> {
+        return Race.racingWinner()
     }
 }
