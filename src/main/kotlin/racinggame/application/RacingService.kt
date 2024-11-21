@@ -17,14 +17,7 @@ object RacingService {
         require(names.isNotEmpty()) { ERROR_CAR_COUNT }
         require(roundCount > 0) { ERROR_ROUND_COUNT }
 
-//        val cars = MutableList(names.size) { i -> Car(names[i], 0) }
-
-        val cars =
-            ArrayDeque<Car>().apply {
-                names.forEach { name ->
-                    add(Car(name, 0))
-                }
-            }
+        val cars = ArrayDeque(names.map(::Car))
 
         val race = Race()
         repeat(roundCount) {
